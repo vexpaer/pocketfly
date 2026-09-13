@@ -16,7 +16,7 @@ jobs:
         run: ./scripts/run-native-tests.sh
 
   android:
-    name: Simulator build & tests
+    name: Kotlin build & tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -30,10 +30,10 @@ jobs:
       - name: Set up Gradle (with caching)
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Unit tests (sample checksum coverage)
+      - name: Unit tests
         env:
           POCKETFLY_SAMPLE_ZIP: data/sample/sample_1024.pflybrain
-        run: ./gradlew :simulator:testDebugUnitTest
+        run: ./gradlew :core:test :simulator:testDebugUnitTest
 
-      - name: Assemble simulator (native build via NDK)
+      - name: Assemble modules
         run: ./gradlew :simulator:assembleDebug
