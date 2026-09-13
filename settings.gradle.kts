@@ -21,3 +21,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "PocketFly"
+
+include(":simulator")
