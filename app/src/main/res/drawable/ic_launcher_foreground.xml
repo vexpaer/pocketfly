@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- A miniature connectome: nodes and edges -->
+    <path
+        android:pathData="M40,44 L54,36 L68,44 M40,44 L44,62 L54,72 L64,62 L68,44 M44,62 L54,36 M64,62 L54,36 M44,62 L64,62"
+        android:strokeColor="#E8B44A"
+        android:strokeWidth="2.2"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000" />
+
+    <path
+        android:pathData="M54,36 m -5,0 a 5,5 0 1,0 10,0 a 5,5 0 1,0 -10,0"
+        android:fillColor="#E8B44A" />
+    <path
+        android:pathData="M40,44 m -3.4,0 a 3.4,3.4 0 1,0 6.8,0 a 3.4,3.4 0 1,0 -6.8,0"
+        android:fillColor="#7FB4A8" />
+    <path
+        android:pathData="M68,44 m -3.4,0 a 3.4,3.4 0 1,0 6.8,0 a 3.4,3.4 0 1,0 -6.8,0"
+        android:fillColor="#7FB4A8" />
+    <path
+        android:pathData="M44,62 m -3.4,0 a 3.4,3.4 0 1,0 6.8,0 a 3.4,3.4 0 1,0 -6.8,0"
+        android:fillColor="#7FB4A8" />
+    <path
+        android:pathData="M64,62 m -3.4,0 a 3.4,3.4 0 1,0 6.8,0 a 3.4,3.4 0 1,0 -6.8,0"
+        android:fillColor="#7FB4A8" />
+    <path
+        android:pathData="M54,72 m -3.8,0 a 3.8,3.8 0 1,0 7.6,0 a 3.8,3.8 0 1,0 -7.6,0"
+        android:fillColor="#E8B44A" />
+
+    <!-- Wing hint -->
+    <path
+        android:pathData="M58,74 C66,80 74,80 78,74 C72,74 66,72 62,70"
+        android:strokeColor="#8FA3C4"
+        android:strokeWidth="1.6"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000" />
+</vector>
