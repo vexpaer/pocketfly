@@ -1,0 +1,134 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/vexpaer/pocketfly/data/schemas/pocketfly-game.schema.json",
+  "title": "PocketFly game spec",
+  "description": "Schema for .pocketfly.json game/experiment files (schemaVersion 1).",
+  "type": "object",
+  "required": ["schemaVersion", "id", "name", "world"],
+  "additionalProperties": true,
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "id": {"type": "string", "minLength": 1},
+    "name": {"type": "string", "minLength": 1},
+    "description": {"type": "string"},
+    "author": {"type": "string"},
+    "world": {
+      "type": "object",
+      "required": ["width", "height", "objects"],
+      "properties": {
+        "width": {"type": "number", "exclusiveMinimum": 0},
+        "height": {"type": "number", "exclusiveMinimum": 0},
+        "objects": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/object"}
+        }
+      }
+    },
+    "simulation": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "timestepsPerFrame": {"type": "integer", "minimum": 1, "maximum": 64},
+        "speed": {"type": "number", "exclusiveMinimum": 0},
+        "maxSpeed": {"type": "number", "exclusiveMinimum": 0},
+        "turnRate": {"type": "number", "exclusiveMinimum": 0},
+        "gravity": {"type": "number"},
+        "flapImpulse": {"type": "number"},
+        "mode": {"enum": ["topdown", "sidescroller"]},
+        "dynamics": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "decay": {"type": "number", "minimum": 0, "maximum": 1},
+            "threshold": {"type": "number", "exclusiveMinimum": 0},
+            "gain": {"type": "number", "exclusiveMinimum": 0},
+            "noise": {"type": "number", "minimum": 0}
+          }
+        }
+      }
+    },
+    "sensory": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["channel", "groupKey"],
+        "properties": {
+          "channel": {"enum": [
+            "visual.left", "visual.right", "smell.left", "smell.right",
+            "altitude", "obstacle.left", "obstacle.right"
+          ]},
+          "groupKey": {"type": "string", "minLength": 1},
+          "gain": {"type": "number"},
+          "offset": {"type": "number"}
+        }
+      }
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["decoder", "action"],
+        "properties": {
+          "decoder": {"enum": ["difference", "continuous", "threshold"]},
+          "action": {"enum": ["steer", "forward", "flap"]},
+          "leftGroup": {"type": "string"},
+          "rightGroup": {"type": "string"},
+          "group": {"type": "string"},
+          "gain": {"type": "number"},
+          "threshold": {"type": "number"},
+          "deadzone": {"type": "number"},
+          "offset": {"type": "number"}
+        }
+      }
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source", "operator", "value", "action"],
+        "properties": {
+          "id": {"type": "string"},
+          "source": {"type": "string", "minLength": 1},
+          "source2": {"type": "string"},
+          "operator": {"enum": [">", "<", "diff", "ratio", "avg"]},
+          "value": {"type": "number"},
+          "action": {"enum": ["turn_left", "turn_right", "forward", "flap", "stop"]},
+          "strength": {"type": "number"}
+        }
+      }
+    },
+    "rewards": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "food": {"type": "number"},
+        "goal": {"type": "number"},
+        "collision": {"type": "number"},
+        "danger": {"type": "number"},
+        "timePenalty": {"type": "number"}
+      }
+    }
+  },
+  "definitions": {
+    "object": {
+      "type": "object",
+      "required": ["id", "type", "x", "y"],
+      "additionalProperties": true,
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "type": {"enum": [
+          "WALL", "FOOD", "GOAL", "LIGHT", "DANGER", "OBSTACLE", "SPAWN"
+        ]},
+        "x": {"type": "number"},
+        "y": {"type": "number"},
+        "w": {"type": "number", "exclusiveMinimum": 0},
+        "h": {"type": "number", "exclusiveMinimum": 0},
+        "rotation": {"type": "number"},
+        "params": {
+          "type": "object",
+          "additionalProperties": {"type": "number"}
+        }
+      }
+    }
+  }
+}
